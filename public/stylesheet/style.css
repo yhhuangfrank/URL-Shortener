@@ -1,0 +1,8 @@
+div.img-container {
+  height: 8rem;
+  text-align: center;
+}
+
+div.img-container img {
+  height: 100%;
+}

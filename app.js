@@ -9,7 +9,10 @@ const port = 3000;
 
 //- set view engine
 app.engine("hbs", exphbs.engine({ defaultLayout: "main", extname: "hbs" }));
-app.set("view engine", "hbs")
+app.set("view engine", "hbs");
+
+//- load static file
+app.use(express.static("public"));
 
 //- set route
 app.get("/", (req, res) => {
