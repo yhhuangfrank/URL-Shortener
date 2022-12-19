@@ -32,11 +32,32 @@ app.post("/", (req, res) => {
   }
   //- create shorter URl
   const shorterURL = urlShortener();
+
   return URL.create({
     shorterURL,
     originalURL,
   })
     .then(() => res.render("index", { originalURL, shorterURL }))
+    .catch((err) => {
+      console.log(err);
+      return res.render("error", { error: err.message });
+    });
+});
+
+//- redirect to certain page
+app.get("/:shorterURL", (req, res) => {
+  const { shorterURL } = req.params;
+  return URL.find({ shorterURL })
+    .lean()
+    .then((url) => {
+      if (!url.length) {
+        // console.log("not found");
+        return res.redirect("/");
+      }
+      // console.log("found!");
+      //- if find corresponding shoterURL
+      return res.redirect(url[0].originalURL);
+    })
     .catch((err) => {
       console.log(err);
       return res.render("error", { error: err.message });
