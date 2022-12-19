@@ -30,14 +30,30 @@ app.post("/", (req, res) => {
   if (invalidMessage) {
     return res.render("index", { originalURL, invalidMessage });
   }
-  //- create shorter URl
-  const shorterURL = urlShortener();
-
-  return URL.create({
-    shorterURL,
-    originalURL,
-  })
-    .then(() => res.render("index", { originalURL, shorterURL }))
+  //- check if originalURL exist in db
+  return URL.find({ originalURL })
+    .lean()
+    .then((url) => {
+      //- if not exist
+      if (!url.length) {
+        console.log("new URL");
+        //- create shorter URl
+        const shorterURL = urlShortener();
+        return URL.create({
+          shorterURL,
+          originalURL,
+        })
+          .then(() => res.render("index", { originalURL, shorterURL }))
+          .catch((err) => {
+            console.log(err);
+            return res.render("error", { error: err.message });
+          });
+      }
+      //- if exist
+      console.log("existed!");
+      const { shorterURL } = url[0];
+      return res.render("index", { originalURL, shorterURL });
+    })
     .catch((err) => {
       console.log(err);
       return res.render("error", { error: err.message });
