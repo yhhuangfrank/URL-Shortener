@@ -26,16 +26,21 @@ app.get("/", (req, res) => {
 app.post("/", (req, res) => {
   const { originalURL } = req.body;
   //- check form input
-  const errorMessage = checkFormInput(originalURL);
-  if (errorMessage) {
-    return res.render("index", { originalURL, errorMessage });
+  const invalidMessage = checkFormInput(originalURL);
+  if (invalidMessage) {
+    return res.render("index", { originalURL, invalidMessage });
   }
   //- create shorter URl
   const shorterURL = urlShortener();
   return URL.create({
     shorterURL,
     originalURL,
-  }).then(() => res.render("index", { originalURL, shorterURL }));
+  })
+    .then(() => res.render("index", { originalURL, shorterURL }))
+    .catch((err) => {
+      console.log(err);
+      return res.render("error", { error: err.message });
+    });
 });
 
 //- listen to server

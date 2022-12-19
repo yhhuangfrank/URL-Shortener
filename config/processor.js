@@ -2,13 +2,13 @@
 module.exports = {
   checkFormInput(url) {
     const isValid = /http\:\/\/|https\:\/\//.test(url);
-    let errorMessage = ``;
+    let invalidMessage = ``;
     if (!isValid) {
-      errorMessage += `<code>
+      invalidMessage += `<code>
       Your URL is not valid !
     </code>`;
     }
-    return errorMessage;
+    return invalidMessage;
   },
   urlShortener() {
     const letters = "abcdefghijklmnopqrstuvwxyz";
