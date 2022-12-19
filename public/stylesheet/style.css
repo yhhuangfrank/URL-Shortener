@@ -6,3 +6,7 @@ div.img-container {
 div.img-container img {
   height: 100%;
 }
+
+a#home-link {
+  text-decoration: none;
+}
