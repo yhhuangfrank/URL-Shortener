@@ -36,8 +36,7 @@ app.post("/", (req, res) => {
     .then((url) => {
       //- if not exist
       if (!url.length) {
-        console.log("new URL");
-        //- create shorter URl
+        //- create shorter URL
         const shorterURL = urlShortener();
         return URL.create({
           shorterURL,
@@ -49,8 +48,7 @@ app.post("/", (req, res) => {
             return res.render("error", { error: err.message });
           });
       }
-      //- if exist
-      console.log("existed!");
+      //- if exist - get corresponding shorterURL
       const { shorterURL } = url[0];
       return res.render("index", { originalURL, shorterURL });
     })
@@ -67,10 +65,8 @@ app.get("/:shorterURL", (req, res) => {
     .lean()
     .then((url) => {
       if (!url.length) {
-        // console.log("not found");
         return res.redirect("/");
       }
-      // console.log("found!");
       //- if find corresponding shoterURL
       return res.redirect(url[0].originalURL);
     })

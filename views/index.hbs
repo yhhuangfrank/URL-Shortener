@@ -38,12 +38,17 @@
     {{/if}}
     {{#if shorterURL}}
       <div class="alert alert-secondary text-center" role="alert">
-        <code>New URL is :
+        <code class="me-2">New URL is :
           <a
             href="/{{shorterURL}}"
             target="_blank"
+            id="shorterURL"
           >http://localhost:3000/{{shorterURL}}</a></code>
+          <button type="button" class="btn btn-primary" id="copyBtn">Copy</button>
       </div>
     {{/if}}
   </div>
 </div>
+
+
+
