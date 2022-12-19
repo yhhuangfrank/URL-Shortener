@@ -1,11 +1,11 @@
 {
   "list": [
     {
-      "shortenURL": "test1",
+      "shorterURL": "test1",
       "originalURL": "https://www.google.com.tw/"
     },
     {
-      "shortenURL": "test2",
+      "shorterURL": "test2",
       "originalURL": "https://www.youtube.com/"
     }
   ]

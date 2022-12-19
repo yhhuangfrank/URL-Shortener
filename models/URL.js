@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 mongoose.set("strictQuery", false);
 const { Schema } = mongoose;
 const URLSchema = new Schema({
-  shortenURL: {
+  shorterURL: {
     type: String,
     required: true,
     minLength: 5,

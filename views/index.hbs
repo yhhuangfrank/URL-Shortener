@@ -12,16 +12,25 @@
         type="text"
         class="form-control"
         placeholder="Input URL here ..."
-        name="inputURL"
-        value="{{inputURL}}"
+        name="originalURL"
+        value="{{originalURL}}"
         required
       />
       <button type="submit" class="btn btn-primary mt-2">Go !</button>
     </form>
-    <div class="alert alert-secondary text-center" role="alert">
-      {{#if errorMessage}}
+    {{#if errorMessage}}
+      <div class="alert alert-secondary text-center" role="alert">
         {{{errorMessage}}}
-      {{/if}}
-    </div>
+      </div>
+    {{/if}}
+    {{#if shorterURL}}
+      <div class="alert alert-secondary text-center" role="alert">
+        <code>New URL is :
+          <a
+            href="/{{shorterURL}}"
+            target="_blank"
+          >http:localhost:3000/{{shorterURL}}</a></code>
+      </div>
+    {{/if}}
   </div>
 </div>

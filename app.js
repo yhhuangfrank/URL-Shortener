@@ -2,7 +2,7 @@
 const express = require("express");
 const exphbs = require("express-handlebars");
 const URL = require("./models/URL");
-const checkFormInput = require("./checkFormInput");
+const { checkFormInput, urlShortener } = require("./config/processor");
 //- connect to db
 require("./config/mongoose");
 
@@ -24,12 +24,18 @@ app.get("/", (req, res) => {
 });
 
 app.post("/", (req, res) => {
-  const { inputURL } = req.body;
+  const { originalURL } = req.body;
   //- check form input
-  const errorMessage = checkFormInput(inputURL);
+  const errorMessage = checkFormInput(originalURL);
   if (errorMessage) {
-    return res.render("index", { inputURL, errorMessage });
+    return res.render("index", { originalURL, errorMessage });
   }
+  //- create shorter URl
+  const shorterURL = urlShortener();
+  return URL.create({
+    shorterURL,
+    originalURL,
+  }).then(() => res.render("index", { originalURL, shorterURL }));
 });
 
 //- listen to server
