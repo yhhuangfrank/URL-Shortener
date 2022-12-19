@@ -7,16 +7,29 @@
         alt="URL-image"
       />
     </div>
-    <form action="/" , method="POST" class="text-center mt-2">
-      <input
-        type="text"
-        class="form-control"
-        placeholder="Input URL here ..."
-        name="originalURL"
-        value="{{originalURL}}"
-        required
-      />
-      <button type="submit" class="btn btn-primary mt-2">Go !</button>
+    <form
+      action="/"
+      method="POST"
+      class="needs-validation text-center mt-2"
+      id="form"
+      novalidate
+    >
+      <div class="mb-3">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Input URL here ..."
+          name="originalURL"
+          value="{{originalURL}}"
+          required
+        />
+        <div class="valid-feedback">
+        </div>
+        <div class="invalid-feedback">
+          This field is required !
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary">Go !</button>
     </form>
     {{#if invalidMessage}}
       <div class="alert alert-secondary text-center" role="alert">
