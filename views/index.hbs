@@ -12,8 +12,16 @@
         type="text"
         class="form-control"
         placeholder="Input URL here ..."
+        name="inputURL"
+        value="{{inputURL}}"
+        required
       />
       <button type="submit" class="btn btn-primary mt-2">Go !</button>
     </form>
+    <div class="alert alert-secondary text-center" role="alert">
+      {{#if errorMessage}}
+        {{{errorMessage}}}
+      {{/if}}
+    </div>
   </div>
 </div>
