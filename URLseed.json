@@ -1,0 +1,12 @@
+{
+  "list": [
+    {
+      "shortenURL": "test1",
+      "originalURL": "https://www.google.com.tw/"
+    },
+    {
+      "shortenURL": "test2",
+      "originalURL": "https://www.youtube.com/"
+    }
+  ]
+}
