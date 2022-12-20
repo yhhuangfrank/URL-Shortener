@@ -44,7 +44,7 @@ router.get("/:shorterURL", (req, res) => {
     .lean()
     .then((url) => {
       if (!url.length) {
-        return res.redirect("/");
+        return res.redirect("/home");
       }
       //- if find corresponding shoterURL
       return res.redirect(url[0].originalURL);
