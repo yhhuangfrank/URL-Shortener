@@ -2,7 +2,7 @@
 
 A simple tool for shortening a URL 
 
-![Previrew](https://github.com/yhhuangfrank/Restaurant-project-ver2/blob/main/public/image/preview-image.png)
+![Previrew](https://github.com/yhhuangfrank/URL-Shortener/blob/main/public/image/preview-image.png)
 
 
 ## Features
