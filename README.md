@@ -9,8 +9,7 @@ A simple tool for shortening a URL
 
 - Get a shorter URL link that feedbacked on page
 - Connect to original web page by shortened URL
-- Copy to clipboard by simply clicking the "copy" button 
-- 
+- Copy shorten URL to clipboard by simply clicking the "copy" button 
 
 ### Installation
 
