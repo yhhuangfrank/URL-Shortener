@@ -10,7 +10,7 @@ const URLSchema = new Schema({
     maxLength: 5,
     validate: {
       validator(value) {
-        return /[a-z0-9]{5}/.test(value);
+        return /[A-Za-z0-9]{5}/.test(value);
       },
       message: (input) => `your shortenURL: ${input.value} is not valid !`,
     },

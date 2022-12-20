@@ -12,9 +12,11 @@ module.exports = {
   },
   urlShortener() {
     const letters = "abcdefghijklmnopqrstuvwxyz";
+    const upperLetters = letters.toUpperCase()
     const numbers = "0123456789";
     const urlBox = [];
     urlBox.push(...letters);
+    urlBox.push(...upperLetters);
     urlBox.push(...numbers);
     let result = "";
     //- 建立5位英數字組合短網址
