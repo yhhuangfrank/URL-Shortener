@@ -13,23 +13,32 @@ router.post("/", (req, res) => {
   return URL.find({ originalURL })
     .lean()
     .then((url) => {
-      //- if not exist
-      if (!url.length) {
-        //- create shorter URL
-        const shorterURL = urlShortener();
-        return URL.create({
-          shorterURL,
-          originalURL,
-        })
-          .then(() => res.render("index", { originalURL, shorterURL }))
-          .catch((err) => {
-            console.log(err);
-            return res.render("error", { error: err.message });
-          });
+      if (url.length) {
+        //- if exist - get corresponding shorterURL
+        const { shorterURL } = url[0];
+        return res.render("index", { originalURL, shorterURL });
       }
-      //- if exist - get corresponding shorterURL
-      const { shorterURL } = url[0];
-      return res.render("index", { originalURL, shorterURL });
+    })
+    .then(function checkDuplicate() {
+      //- if not exist, chec if shortURL is duplicated
+      const shorterURL = urlShortener();
+      return URL.findOne({ shorterURL }).then((url) => {
+        if (url) {
+          return checkDuplicate(); //- re-generate
+        } else {
+          //- create shorter URL
+          console.log("is new URL");
+          return URL.create({
+            shorterURL,
+            originalURL,
+          })
+            .then(() => res.render("index", { originalURL, shorterURL }))
+            .catch((err) => {
+              console.log(err);
+              return res.render("error", { error: err.message });
+            });
+        }
+      });
     })
     .catch((err) => {
       console.log(err);

@@ -12,7 +12,7 @@ module.exports = {
   },
   urlShortener() {
     const letters = "abcdefghijklmnopqrstuvwxyz";
-    const upperLetters = letters.toUpperCase()
+    const upperLetters = letters.toUpperCase();
     const numbers = "0123456789";
     const urlBox = [];
     urlBox.push(...letters);
