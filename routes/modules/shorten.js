@@ -9,6 +9,7 @@ router.post("/", (req, res) => {
   if (invalidMessage) {
     return res.render("index", { originalURL, invalidMessage });
   }
+  let isSameURL = false;
   //- check if originalURL exist in db
   return URL.find({ originalURL })
     .lean()
@@ -16,18 +17,22 @@ router.post("/", (req, res) => {
       if (url.length) {
         //- if exist - get corresponding shorterURL
         const { shorterURL } = url[0];
+        isSameURL = true;
         return res.render("index", { originalURL, shorterURL });
       }
     })
     .then(function checkDuplicate() {
-      //- if not exist, chec if shortURL is duplicated
+      //- if already render same shorterURL, don't need checkDuplicate 
+      if (isSameURL) {
+        return;
+      }
+      //- if not exist, check if shorterURL is duplicated
       const shorterURL = urlShortener();
       return URL.findOne({ shorterURL }).then((url) => {
         if (url) {
           return checkDuplicate(); //- re-generate
         } else {
           //- create shorter URL
-          console.log("is new URL");
           return URL.create({
             shorterURL,
             originalURL,
